@@ -15,6 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function(){
-    return view('index');
-})->name('home');
+Route::get('/home', 'PostsController@index')->name('home');
