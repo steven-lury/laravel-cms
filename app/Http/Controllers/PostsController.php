@@ -17,9 +17,8 @@ class PostsController extends Controller
         //  dd(\DB::getQueryLog());
     }
 
-    public function show($id){
+    public function show(Post $post){
 
-        $post = Post::findOrFail($id);
         return view('show', compact('post'));
 
     }
