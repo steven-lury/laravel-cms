@@ -11,10 +11,10 @@ class PostsController extends Controller
 
     public function index()
     {
-        //\DB::enableQueryLog();
-        $posts = Post::with('user', 'comments')->firstLatest()->simplePaginate($this->limit);
-         return view('index', compact('posts'));//->render();
-         //dd(\DB::getQueryLog());
+       // \DB::enableQueryLog();
+        $posts = Post::with('user', 'comments')->firstLatest()->published()->simplePaginate($this->limit);
+        return view('index', compact('posts'));//->render();
+        //  dd(\DB::getQueryLog());
     }
 
 }
