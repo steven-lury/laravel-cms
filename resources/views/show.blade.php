@@ -28,7 +28,7 @@
                                 <li><i class="fa fa-comments"></i><a href="#">{{$post->comments->count()}} Comments</a></li>
                             </ul>
                         </div>
-                        {{$post->body}}
+                        {!! $post->body_html !!}
                     </div>
                 </div>
             </article>

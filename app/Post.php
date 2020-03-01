@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Post extends Model
 {
@@ -49,6 +50,12 @@ class Post extends Model
 
         $now = Carbon::now();
         return $query->where('published_at', '<=', $now);
+
+    }
+
+    public function getBodyHtmlAttribute(){
+
+        return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL ;
 
     }
 }
