@@ -28,8 +28,8 @@ class PostsTableSeeder extends Seeder
                 'body' => $facker->paragraphs(rand(250, 300), true),
                 'excerpt' => $facker->text(rand(230, 236)),
                 'image' => rand(0, 1) == 1 ? $image : NULL,
-                'created_at' => $now->copy()->addDays($i),
-                'updated_at' => $now->copy()->addDays($i)
+                'created_at' => $now->copy()->subDays($i),
+                'updated_at' => $now->copy()->subDays($i)
             ];
         }
         DB::table('posts')->insert($posts);

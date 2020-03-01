@@ -17,4 +17,28 @@ class Post extends Model
             }
         }
     }
+
+    public function getDateAttribute(){
+
+        return $this->created_at->diffForHumans();
+
+    }
+
+    public function user(){
+
+        return $this->belongsTo(User::class);
+
+    }
+
+    public function comments(){
+
+        return $this->hasMany(Comment::class);
+
+    }
+
+    public function scopeFirstLatest($query){
+
+        return $query->orderBy('created_at', 'desc');
+
+    }
 }
