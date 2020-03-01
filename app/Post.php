@@ -40,6 +40,11 @@ class Post extends Model
 
     }
 
+    public function category()
+    {
+        return $this->belongsTo(category::class);
+    }
+
     public function scopeFirstLatest($query){
 
         return $query->orderBy('created_at', 'desc');

@@ -179,26 +179,12 @@
                     </div>
                     <div class="widget-body">
                         <ul class="categories">
-                            <li>
-                                <a href="#"><i class="fa fa-angle-right"></i> Web Development</a>
-                                <span class="badge pull-right">10</span>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-angle-right"></i> Web Design</a>
-                                <span class="badge pull-right">10</span>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-angle-right"></i> General</a>
-                                <span class="badge pull-right">10</span>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-angle-right"></i> DIY</a>
-                                <span class="badge pull-right">10</span>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-angle-right"></i> Facebook Development</a>
-                                <span class="badge pull-right">10</span>
-                            </li>
+                            @foreach($categories as $cat)
+                                    <li>
+                                        <a href="{{route('category', $cat->id)}}"><i class="fa fa-angle-right"></i> {{$cat->title}}</a>
+                                        <span class="badge pull-right">{{$cat->posts->count()}}</span>
+                                    </li>
+                                @endforeach
                         </ul>
                     </div>
                 </div>

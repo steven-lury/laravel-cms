@@ -30,7 +30,8 @@ class PostsTableSeeder extends Seeder
                 'image' => rand(0, 1) == 1 ? $image : NULL,
                 'created_at' => $now->copy()->subDays($i),
                 'updated_at' => $now->copy()->subDays($i),
-                'published_at' => rand(0, 1) == 1 ? NULL : $now->copy()->subDays(rand(3, 6))
+                'published_at' => rand(0, 1) == 1 ? NULL : $now->copy()->subDays(rand(3, 6)),
+                'category_id' => rand(1, 4)
             ];
         }
         DB::table('posts')->insert($posts);

@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('/home', 'PostsController@index')->name('home');
 Route::get('/post/{post}', 'PostsController@show')->name('post.show');
+Route::get('/category/{category}', 'PostsController@category')->name('category');
