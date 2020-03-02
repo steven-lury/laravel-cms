@@ -29,7 +29,7 @@
                                     <ul class="post-meta-group">
                                         <li><i class="fa fa-user"></i><a href="#"> {{$post->user->name}}</a></li>
                                         <li><i class="fa fa-clock-o"></i><time> {{$post->date}}</time></li>
-                                        <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
+                                        <li><i class="fa fa-tags"></i><a href="{{route('category', $post->category->slug)}}"> {{$post->category->title}}</a></li>
                                         <li><i class="fa fa-comments"></i><a href="#">{{$post->comments->count()}} Comments</a></li>
                                     </ul>
                                 </div>
@@ -62,21 +62,7 @@
                         </div><!-- /input-group -->
                     </div>
 
-                    <div class="widget">
-                        <div class="widget-heading">
-                            <h4>Categories</h4>
-                        </div>
-                        <div class="widget-body">
-                            <ul class="categories">
-                                @foreach($categories as $cat)
-                                    <li>
-                                        <a href="{{route('category', $cat->id)}}"><i class="fa fa-angle-right"></i> {{$cat->title}}</a>
-                                        <span class="badge pull-right">{{$cat->posts->count()}}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
+                    @include('layouts.sidebar')
 
                     <div class="widget">
                         <div class="widget-heading">
