@@ -27,7 +27,7 @@
                             <div class="post-meta padding-10 clearfix">
                                 <div class="pull-left">
                                     <ul class="post-meta-group">
-                                        <li><i class="fa fa-user"></i><a href="#"> {{$post->user->name}}</a></li>
+                                        <li><i class="fa fa-user"></i><a href="{{route('user.post', $post->user->slug)}}"> {{$post->user->name}}</a></li>
                                         <li><i class="fa fa-clock-o"></i><time> {{$post->date}}</time></li>
                                         <li><i class="fa fa-tags"></i><a href="{{route('category', $post->category->slug)}}"> {{$post->category->title}}</a></li>
                                         <li><i class="fa fa-comments"></i><a href="#">{{$post->comments->count()}} Comments</a></li>
@@ -64,54 +64,7 @@
 
                     @include('layouts.sidebar')
 
-                    <div class="widget">
-                        <div class="widget-heading">
-                            <h4>Popular Posts</h4>
-                        </div>
-                        <div class="widget-body">
-                            <ul class="popular-posts">
-                                <li>
-                                    <div class="post-image">
-                                        <a href="#">
-                                            <img src="img/Post_Image_5_thumb.jpg" />
-                                        </a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h6><a href="#">Blog Post #5</a></h6>
-                                        <div class="post-meta">
-                                            <span>36 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-image">
-                                        <a href="#">
-                                            <img src="img/Post_Image_4_thumb.jpg" />
-                                        </a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h6><a href="#">Blog Post #4</a></h6>
-                                        <div class="post-meta">
-                                            <span>36 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-image">
-                                        <a href="#">
-                                            <img src="img/Post_Image_3_thumb.jpg" />
-                                        </a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h6><a href="#">Blog Post #3</a></h6>
-                                        <div class="post-meta">
-                                            <span>36 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
 
                     <div class="widget">
                         <div class="widget-heading">

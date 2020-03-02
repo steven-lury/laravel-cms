@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
+            $table->integer('view_count')->default(0);
             $table->text('body');
             $table->text('excerpt');
             $table->timestamps();

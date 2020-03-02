@@ -41,11 +41,12 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="#">{{$post->user->name}}</a></h4>
+                    <h4 class="media-heading"><a href="{{route('user.post', $post->user->slug)}}">{{$post->user->name}}</a></h4>
                     <div class="post-author-count">
                       <a href="#">
                           <i class="fa fa-clone"></i>
-                          {{$post->user->posts->count()}} posts
+                          <?php $postCount = $post->user->posts()->published()->count(); ?>
+                          {{$post->user->posts()->published()->count()}} {{str_plural('post',  $postCount)}}
                       </a>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia excepturi neque sint magnam minus aliquam, voluptatem, labore quis praesentium eum quae dolorum temporibus consequuntur! Non.</p>
@@ -174,55 +175,6 @@
                 </div>
 
                 @include('layouts.sidebar')
-
-                <div class="widget">
-                    <div class="widget-heading">
-                        <h4>Popular Posts</h4>
-                    </div>
-                    <div class="widget-body">
-                        <ul class="popular-posts">
-                            <li>
-                                <div class="post-image">
-                                    <a href="#">
-                                        <img src="img/Post_Image_5_thumb.jpg" />
-                                    </a>
-                                </div>
-                                <div class="post-body">
-                                    <h6><a href="#">Blog Post #5</a></h6>
-                                    <div class="post-meta">
-                                        <span>36 minutes ago</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="post-image">
-                                    <a href="#">
-                                        <img src="img/Post_Image_4_thumb.jpg" />
-                                    </a>
-                                </div>
-                                <div class="post-body">
-                                    <h6><a href="#">Blog Post #4</a></h6>
-                                    <div class="post-meta">
-                                        <span>36 minutes ago</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="post-image">
-                                    <a href="#">
-                                        <img src="img/Post_Image_3_thumb.jpg" />
-                                    </a>
-                                </div>
-                                <div class="post-body">
-                                    <h6><a href="#">Blog Post #3</a></h6>
-                                    <div class="post-meta">
-                                        <span>36 minutes ago</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
 
                 <div class="widget">
                     <div class="widget-heading">

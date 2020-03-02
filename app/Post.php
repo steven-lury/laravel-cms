@@ -58,9 +58,15 @@ class Post extends Model
 
     }
 
+    public function scopePopular($query)
+    {
+       return $query->orderBy('view_count', 'DESC');
+    }
+
     public function getBodyHtmlAttribute(){
 
         return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL ;
 
     }
+
 }

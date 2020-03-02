@@ -14,6 +14,7 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         //
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('posts')->truncate();
         //generate 10 new posts
         $posts = [];
@@ -31,7 +32,8 @@ class PostsTableSeeder extends Seeder
                 'created_at' => $now->copy()->subDays($i),
                 'updated_at' => $now->copy()->subDays($i),
                 'published_at' => rand(0, 1) == 1 ? NULL : $now->copy()->subDays(rand(3, 6)),
-                'category_id' => rand(1, 4)
+                'category_id' => rand(1, 4),
+                'view_count' => rand(0, 3)*3
             ];
         }
         DB::table('posts')->insert($posts);

@@ -18,17 +18,20 @@ class UsersTableSeeder extends Seeder
         //set 3 users
         DB::table('users')->insert([
             [
-                'name' => 'Reza',
+                'name' => 'Reza Asgari',
+                'slug' => str_slug('Reza Asgari'),
                 'email' => 'reza67asgari@yahoo.com',
                 'password' => bcrypt('1234')
             ],
             [
-                'name' => 'Ali',
+                'name' => 'Ali Jafari',
+                'slug' => str_slug('Ali Jafari'),
                 'email' => 'ali@yahoo.com',
                 'password' => bcrypt('1234')
             ],
             [
-                'name' => 'Hamid',
+                'name' => 'Hamid Nazari',
+                'slug' => str_slug('Hamid Nazari'),
                 'email' => 'hamid@yahoo.com',
                 'password' => bcrypt('1234')
             ]

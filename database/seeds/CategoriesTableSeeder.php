@@ -20,7 +20,7 @@ class CategoriesTableSeeder extends Seeder
             ],
             [
                 'title' => 'C#',
-                'slug' => 'c#'
+                'slug' => 'c-sharp'
             ],
             [
                 'title' => 'Larvel Framework',
