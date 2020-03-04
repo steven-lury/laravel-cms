@@ -19,3 +19,13 @@ Route::get('/home', 'PostsController@index')->name('home');
 Route::get('/post/{post}', 'PostsController@show')->name('post.show');
 Route::get('/category/{category}', 'PostsController@category')->name('category');
 Route::get('/user/{user}', 'PostsController@user')->name('user.post');
+
+Auth::routes();
+
+Route::get('/blog', 'HomeController@index')->name('default');
+
+/**
+ * Admin Dashboard Controller
+ */
+Route::get('/dashboard', 'Admin\DashboardsController@index')->name('dashboard.home');
+Route::resource('admin/post', 'Admin\PostsController');
