@@ -16,7 +16,10 @@
         All Posts
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+        <li>
+            <a href="{{route('dashboard.home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Posts</li>
       </ol>
     </section>
 
@@ -25,8 +28,18 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
+                <div class="box-header">
+                    <a href="{{route('post.create')}}" class="btn btn-success">Add Post</a>
+                </div>
               <!-- /.box-header -->
               <div class="box-body ">
+                @if( !$posts->count())
+                    <div class="box-header">
+                        <div class="alert alert-danger">
+                            <strong>No Post Found</strong>
+                        </div>
+                    </div>
+                @else
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -61,16 +74,15 @@
                             @endforeach
                         </tbody>
                     </table>
+                @endif
               </div>
               <!-- /.box-body -->
               <div class="box-footer clearfix">
                     <div class="pull-left">
-                        <ul class="pagination no-margin">
-                            {{$posts->links()}}
-                        </ul>
+                        {{$posts->links()}}
                     </div>
                     <div class="pull-right">
-                        <small>{{$posts->count()}} {{str_plural("post", $posts->count())}}</small>
+                        <small>{{$postCount}} {{ str_plural('Post', $postCount) }}</small>
                     </div>
               </div>
             </div>
@@ -84,3 +96,11 @@
   <!-- /.content-wrapper -->
 
 @endsection
+
+@push('js')
+
+<script>
+    $('ul.pagination').addClass('no-margin pagination-sm');
+</script>
+
+@endpush

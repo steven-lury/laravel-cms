@@ -15,5 +15,7 @@
 <script src="{{asset('backend/js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('backend/js/app.min.js')}}"></script>
+
+@stack('js')
 </body>
 </html>
