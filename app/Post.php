@@ -9,14 +9,17 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 class Post extends Model
 {
 
+    protected $fillable = ['title', 'excerpt', 'published_at', 'slug', 'image', 'body', 'category_id'];
     protected $dates = ['published_at'];
+
     public function getImageUrlAttribute(){
 
         $imageUrl = '';
         if(! is_null($this->image)){
-            $imagePath = public_path()."/img/".$this->image;
+            $directory_img = config('cms.image.directory');
+            $imagePath = public_path()."/{$directory_img}/".$this->image;
             if(file_exists($imagePath)){
-                $imageUrl = asset('img/'.$this->image);
+                $imageUrl = asset("{$directory_img}/".$this->image);
                 return $imageUrl;
             }
         }
@@ -84,6 +87,12 @@ class Post extends Model
             return "<span class='label label-info'>Schedule</span>";
         }
         return "<span class='label label-success'>Published</span>";
+
+    }
+
+    public function setPublishedAtAttribute ($value){
+
+        $this->attributes['published_at'] = $value ?: NULL;
 
     }
 

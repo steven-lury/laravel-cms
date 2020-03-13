@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Post;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -28,7 +29,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.posts.create');
     }
 
     /**
@@ -37,9 +38,11 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $data = $this->handleRequest($request);
+        $request->user()->posts()->create($data);
+        return redirect()->route('post.index')->with('successMsg', 'Post is successfully added');
     }
 
     /**
@@ -85,5 +88,27 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function handleRequest($request)
+    {
+        $data = $request->all();
+        if($request->hasFile('image')){
+            $directory = config('cms.image.directory');
+            $width = config('cms.image.thumb.width');
+            $height = config('cms.image.thumb.height');
+            $image       = $request->file('image');
+            $fileName    = $image->getClientOriginalName();
+            $destination = public_path($directory).'/';
+            $successUpload = $image->move($destination, $fileName);
+            if($successUpload){
+                $extension = $image->getClientOriginalExtension();
+                $thumb = str_replace(".{$extension}", "_thumb.{$extension}", $fileName );
+                Image::make($destination.'/'.$fileName)->resize($width, $height)->save($destination.'/'.$thumb);
+
+            }
+            $data['image'] = $fileName;
+        }
+        return $data;
     }
 }

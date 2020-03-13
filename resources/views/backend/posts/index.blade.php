@@ -40,6 +40,14 @@
                         </div>
                     </div>
                 @else
+
+                @if( session('successMsg'))
+                    <div class="box-header">
+                        <div class="alert alert-success">
+                           {{session('successMsg')}}
+                        </div>
+                    </div>
+                @endif
                     <table class="table table-bordered">
                         <thead>
                             <tr>
