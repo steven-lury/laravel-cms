@@ -29,7 +29,7 @@
           <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <a href="{{route('post.create')}}" class="btn btn-success">Add Post</a>
+                    <a href="{{route('admin.post.create')}}" class="btn btn-success">Add Post</a>
                 </div>
               <!-- /.box-header -->
               <div class="box-body ">
@@ -71,10 +71,10 @@
                                             {!! $post->publishedLabel() !!}
                                     </td>
                                     <td>
-                                        <a href="{{route('post.edit', $post->id)}}" class="btn btn-sx btn-primary">
+                                        <a href='{{ route("admin.post.edit", $post->id)}}' class="btn btn-sx btn-primary">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{route('post.destroy', $post->id)}}" class="btn btn-danger btn-sx">
+                                        <a href="{{route('admin.post.destroy', $post->id)}}" class="btn btn-danger btn-sx">
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </td>

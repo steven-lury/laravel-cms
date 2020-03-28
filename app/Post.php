@@ -25,6 +25,22 @@ class Post extends Model
         }
     }
 
+    public function getImageUrlThumbAttribute()
+    {
+
+       //$extension = $this->image->getClientOriginalExtension();
+        $thumb = str_replace(".", "_thumb.", $this->image );
+        $directory_img = config('cms.image.directory');
+       if(file_exists(public_path()."/{$directory_img}/".$thumb)){
+           if($thumb== '')
+            return "http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image";
+        $thumb_url = '';
+           $thumb_url = asset("{$directory_img}/".$thumb);
+           return $thumb_url;
+       }
+
+    }
+
     public function getDateAttribute(){
 
         return $this->published_at->diffForHumans();

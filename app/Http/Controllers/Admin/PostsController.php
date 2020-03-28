@@ -42,7 +42,7 @@ class PostsController extends Controller
     {
         $data = $this->handleRequest($request);
         $request->user()->posts()->create($data);
-        return redirect()->route('post.index')->with('successMsg', 'Post is successfully added');
+        return redirect()->route('admin.post.index')->with('successMsg', 'Post is successfully added');
     }
 
     /**
@@ -64,7 +64,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('backend.posts.edit', compact('post'));
     }
 
     /**
@@ -74,9 +75,12 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $data = $this->handleRequest($request);
+        $post->update($data);
+        return redirect()->route('admin.post.index')->with('successMsg', "{$post->title} Updated successfully");
     }
 
     /**

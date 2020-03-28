@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostRequest extends FormRequest
 {
@@ -23,12 +24,21 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title'        => 'required|min:5|unique:posts',
+        //dd($this->route('post'));
+        $rules = [
+            'title'        => 'required|min:5',
+            'slug'         => 'required|min:5|unique:posts',
             'body'         => 'required|min:5',
             'category_id'  => 'required',
-            'published_at' => 'date_format:Y-m-d H:i:s',
-            'image'        => 'mimes:png, jpeg, jpg',
+            'published_at' => 'nullable|date_format:Y-m-d H:i:s',
+            'image'        => 'mimes:png, jpeg, jpg, JPEG',
         ];
+        switch($this->method()){
+            case 'PUT':
+            case 'PATCH':
+                $rules ['slug'] = 'required|min:5|'.Rule::unique('posts', 'slug')->ignore($this->route('post'));
+            break;
+        }
+        return $rules;
     }
 }

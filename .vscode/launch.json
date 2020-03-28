@@ -14,9 +14,37 @@
             "name": "Launch currently open script",
             "type": "php",
             "request": "launch",
-            "program": "${file}",
-            "cwd": "${fileDirname}",
-            "port": 9000
+            "program": "localhost/blog/public/index.php",
+            "cwd": "localhost/blog",
+            "port": 9000,
+            "runtimeExecutable": "C:\\xampp\\php\\php.exe"
         }
     ]
 }
+
+// {
+//     "version": "0.2.0",
+//     "compounds": [
+//         {
+//             "name": "Launch & Debug",
+//             "configurations": [ "Launch Program", "Launch localhost" ]
+//         }
+// ],
+// "configurations": [
+
+//     {
+//         "type": "php",
+//         "request": "launch",
+//         "name": "Launch Program",
+//         "cwd": "${blog}",
+//         "port": 9000
+//     },
+//     {
+//         "name": "Launch localhost",
+//             "type": "edge",
+//             "request": "launch",
+//             "url": "http://localhost/public",
+//             "webRoot": "${blog}"
+//         }
+//     ]
+// }

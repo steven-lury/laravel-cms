@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,19 +22,22 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Reza Asgari',
                 'slug' => str_slug('Reza Asgari'),
                 'email' => 'reza67asgari@yahoo.com',
-                'password' => bcrypt('1234')
+                'password' => bcrypt('1234'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
                 'name' => 'Ali Jafari',
                 'slug' => str_slug('Ali Jafari'),
                 'email' => 'ali@yahoo.com',
-                'password' => bcrypt('1234')
+                'password' => bcrypt('1234'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
                 'name' => 'Hamid Nazari',
                 'slug' => str_slug('Hamid Nazari'),
                 'email' => 'hamid@yahoo.com',
-                'password' => bcrypt('1234')
+                'password' => bcrypt('1234'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]
         ]);
     }
