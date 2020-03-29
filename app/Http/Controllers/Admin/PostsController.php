@@ -91,7 +91,18 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::findOrFail($id)->delete();
+        return redirect()->route('admin.post.index')->with('trashMsg', ['Your Post Was Successfully Deleted', $id]);
+    }
+
+    /**
+     * Restore deleted posts from trash
+     */
+    public function restore($id)
+    {
+        $post = Post::onlyTrashed()->findOrFail($id);
+        $post->restore();
+        return redirect()->route('admin.post.index')->with('successMsg', "{$post->title} was successfully restore from trash");
     }
 
     public function handleRequest($request)

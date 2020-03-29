@@ -41,13 +41,7 @@
                     </div>
                 @else
 
-                @if( session('successMsg'))
-                    <div class="box-header">
-                        <div class="alert alert-success">
-                           {{session('successMsg')}}
-                        </div>
-                    </div>
-                @endif
+                @include('backend.layouts.message')
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -71,12 +65,19 @@
                                             {!! $post->publishedLabel() !!}
                                     </td>
                                     <td>
-                                        <a href='{{ route("admin.post.edit", $post->id)}}' class="btn btn-sx btn-primary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="{{route('admin.post.destroy', $post->id)}}" class="btn btn-danger btn-sx">
-                                            <i class="fa fa-times"></i>
-                                        </a>
+
+                                        {!! Form::open(
+                                            ['method'=>'DELETE',
+                                            'route' => ['admin.post.destroy', $post->id]
+                                            ]
+                                            ) !!}
+                                            <a href='{{ route("admin.post.edit", $post->id)}}' class="btn btn-sx btn-primary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-sx">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach
