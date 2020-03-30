@@ -16,4 +16,5 @@
         $('#post-time').val('');
         $('#post-form').submit();
     });
+
 </script>

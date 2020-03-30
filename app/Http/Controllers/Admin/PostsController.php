@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Intervention\Image\Facades\Image;
@@ -15,11 +16,19 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('category', 'user')->latest()->paginate($this->limit);
-        $postCount = Post::all()->count();
-        return view('backend.posts.index', compact('posts', 'postCount'));
+        if(($status = $request->get('status')) && $status == 'trash'){
+            $posts     = Post::onlyTrashed()->with('category', 'user')->latest()->paginate($this->limit);
+            $postCount = Post::onlyTrashed()->count();
+            $trash     = TRUE;
+        }else{
+            $posts     = Post::with('category', 'user')->latest()->paginate($this->limit);
+            $postCount = Post::all()->count();
+            $trash     = FALSE;
+        }
+
+        return view('backend.posts.index', compact('posts', 'postCount', 'trash'));
     }
 
     /**
@@ -93,6 +102,12 @@ class PostsController extends Controller
     {
         Post::findOrFail($id)->delete();
         return redirect()->route('admin.post.index')->with('trashMsg', ['Your Post Was Successfully Deleted', $id]);
+    }
+
+    public function forceDestroy($id)
+    {
+        Post::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('admin.post.index', ['status' => 'trash'])->with('successMsg', 'Your post was permanetly deleted for ever');
     }
 
     /**

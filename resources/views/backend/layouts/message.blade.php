@@ -12,7 +12,7 @@
             'route' => ['admin.post.restore', $postId]
         ]) !!}
         {{$msg}}
-        <button class="btn btn-sx" type="submit"><i class="fa fa-undo">Undo</i></button>
+        <button class="btn btn-xs btn-warning" type="submit"><i class="fa fa-undo">Undo</i></button>
         {!! Form::close() !!}
     </div>
 @endif

@@ -28,9 +28,16 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    <a href="{{route('admin.post.create')}}" class="btn btn-success">Add Post</a>
+                <div class="box-header clearfix">
+                    <div class="pull-left">
+                        <a href="{{route('admin.post.create')}}" class="btn btn-success">Add Post</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="?status=all">All</a> |
+                        <a href="?status=trash">Trash</a>
+                    </div>
                 </div>
+
               <!-- /.box-header -->
               <div class="box-body ">
                 @if( !$posts->count())
@@ -42,47 +49,12 @@
                 @else
 
                 @include('backend.layouts.message')
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <td>#</td>
-                                <td>Title</td>
-                                <td>Author Name</td>
-                                <td>Category</td>
-                                <td>Published Date</td>
-                                <td>Action</td>
-                            </tr>
-                        <thead>
-                        <tbody>
-                            @foreach($posts as $key => $post)
-                                <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$post->title}}</td>
-                                    <td>{{$post->user->name}}</td>
-                                    <td>{{$post->category->title}}</td>
-                                    <td>
-                                        <abbr title="{{$post->timePublished(true)}}"> {{$post->timePublished()}}</abbr>|
-                                            {!! $post->publishedLabel() !!}
-                                    </td>
-                                    <td>
+                    @if ($trash)
+                        @include('backend.posts.trash')
+                    @else
+                        @include('backend.posts.all-post')
+                    @endif
 
-                                        {!! Form::open(
-                                            ['method'=>'DELETE',
-                                            'route' => ['admin.post.destroy', $post->id]
-                                            ]
-                                            ) !!}
-                                            <a href='{{ route("admin.post.edit", $post->id)}}' class="btn btn-sx btn-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <button type="submit" class="btn btn-danger btn-sx">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 @endif
               </div>
               <!-- /.box-body -->
@@ -110,6 +82,10 @@
 
 <script>
     $('ul.pagination').addClass('no-margin pagination-sm');
+    $(document).on('ready', function(){
+        $(".alert").show();
+        setTimeout(function() { $(".alert").fadeOut(); }, 5000);
+    });
 </script>
 
 @endpush

@@ -35,6 +35,7 @@ Route::group(
     function (){
         Route::resource('post', 'PostsController');
         Route::put('post/restore/{post}', 'PostsController@restore')->name('post.restore');
+        Route::delete('post/force-destroy/{post}', 'PostsController@forceDestroy')->name('post.force-destroy');
     }
 );
 
