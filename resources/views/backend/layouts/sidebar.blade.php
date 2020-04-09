@@ -34,7 +34,13 @@
             <li><a href="{{route('admin.post.create')}}"><i class="fa fa-circle-o"></i> Add New</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
+        <li><a href="#"><i class="fa fa-folder"></i> <span>Categories</span></a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.category.index')}}"><i class="fa fa-circle-o"></i>All Categories</a></li>
+                <li><a href="{{route('admin.category.create')}}"><i class="fa fa-circle-o"></i>Create Category</a></li>
+            </ul>
+        </li>
+        <li><a href="{{route('admin.user.index')}}"><i class="fa fa-users"></i>Users</a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

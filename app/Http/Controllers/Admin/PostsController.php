@@ -18,17 +18,30 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
+        $trash     = FALSE;
         if(($status = $request->get('status')) && $status == 'trash'){
             $posts     = Post::onlyTrashed()->with('category', 'user')->latest()->paginate($this->limit);
             $postCount = Post::onlyTrashed()->count();
             $trash     = TRUE;
-        }else{
-            $posts     = Post::with('category', 'user')->latest()->paginate($this->limit);
-            $postCount = Post::all()->count();
-            $trash     = FALSE;
-        }
+        }elseif($status == 'schedule'){
+            $posts     = Post::schedule()->with('category', 'user')->latest()->paginate($this->limit);
+            $postCount = Post::schedule()->count();
 
-        return view('backend.posts.index', compact('posts', 'postCount', 'trash'));
+        }elseif($status == 'draft'){
+            $posts     = Post::draft()->with('category', 'user')->latest()->paginate($this->limit);
+            $postCount = Post::draft()->count();
+
+        }elseif($status == 'published'){
+            $posts     = Post::published()->with('category', 'user')->latest()->paginate($this->limit);
+            $postCount = Post::published()->count();
+
+        }else{
+            $posts = Post::with('category', 'user')->latest()->paginate($this->limit);
+            $postCount = Post::count();
+        }
+        $itemCount = $this->countStatus();
+
+        return view('backend.posts.index', compact('posts', 'postCount', 'trash', 'itemCount'));
     }
 
     /**
@@ -140,5 +153,16 @@ class PostsController extends Controller
             $data['image'] = $fileName;
         }
         return $data;
+    }
+
+    public function countStatus()
+    {
+        return [
+            'all'       => Post::count(),
+            'schedule'  => Post::schedule()->count(),
+            'published' => Post::published()->count(),
+            'draft'     => Post::draft()->count(),
+            'trash'     => Post::onlyTrashed()->count(),
+        ];
     }
 }

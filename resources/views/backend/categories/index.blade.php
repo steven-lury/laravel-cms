@@ -13,13 +13,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        All Posts
+        All Categories
       </h1>
       <ol class="breadcrumb">
         <li>
             <a href="{{route('dashboard.home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
         </li>
-        <li class="active">Posts</li>
+        <li class="active">Categories</li>
       </ol>
     </section>
 
@@ -30,45 +30,31 @@
             <div class="box">
                 <div class="box-header clearfix">
                     <div class="pull-left">
-                        <a href="{{route('admin.post.create')}}" class="btn btn-success">Add Post</a>
-                    </div>
-                    <div class="pull-right">
-                        <?php $link = []; ?>
-                        @foreach ($itemCount as $key => $val)
-                            @if($val)
-                                <?php $link[] = "<a href=\"?status={$key}\">".ucwords($key)."</a><span class=\"badge badge-pill badge-success\">".$val."</span>"; ?>
-                            @endif
-                        @endforeach
-                    {!! implode(' | ', $link) !!}
+                        <a href="{{route('admin.category.create')}}" class="btn btn-success">Add A Category</a>
                     </div>
                 </div>
 
               <!-- /.box-header -->
               <div class="box-body ">
-                @if( !$posts->count())
+                @if( !$categories->count())
                     <div class="box-header">
                         <div class="alert alert-danger">
-                            <strong>No Post Found</strong>
+                            <strong>No Category Found</strong>
                         </div>
                     </div>
                 @else
 
                 @include('backend.layouts.message')
-                    @if ($trash)
-                        @include('backend.posts.trash')
-                    @else
-                        @include('backend.posts.all-post')
-                    @endif
-
+                    @include('backend.categories.all-categories')
                 @endif
               </div>
               <!-- /.box-body -->
               <div class="box-footer clearfix">
                     <div class="pull-left">
-                        {{$posts->appends(Request::query())->links()}}
+                        {{$categories->appends(Request::query())->links()}}
                     </div>
                     <div class="pull-right">
-                        <small>{{$postCount}} {{ str_plural('Post', $postCount) }}</small>
+                        <small>{{$CategoryCount}} {{ str_plural('Category', $CategoryCount) }}</small>
                     </div>
               </div>
             </div>

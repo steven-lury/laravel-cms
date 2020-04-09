@@ -36,6 +36,9 @@ Route::group(
         Route::resource('post', 'PostsController');
         Route::put('post/restore/{post}', 'PostsController@restore')->name('post.restore');
         Route::delete('post/force-destroy/{post}', 'PostsController@forceDestroy')->name('post.force-destroy');
+        Route::resource('category', 'CategoriesController');
+        Route::resource('user', 'UsersController');
+        Route::get('user/confirm/{user}', 'UsersController@confirm')->name('user.confirm');
     }
 );
 

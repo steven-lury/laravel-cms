@@ -85,6 +85,18 @@ class Post extends Model
        return $query->orderBy('view_count', 'DESC');
     }
 
+    public function scopeDraft($query)
+    {
+        return $query->whereNull('published_at');
+
+    }
+
+    public function scopeSchedule($query)
+    {
+        $now = Carbon::now();
+        return $query->where('published_at', '>', $now);
+    }
+
     public function getBodyHtmlAttribute(){
 
         return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL ;
