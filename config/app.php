@@ -139,6 +139,7 @@ return [
          * Helper Providers Added By Me
          */
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Laratrust\LaratrustServiceProvider::class,
         //Collective\Html\HtmlServiceProvider::class,
 
         /*
@@ -235,6 +236,7 @@ return [
          * Add By Me
          */
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Laraturst' => Laratrust\Laratrust::class,
         //'Form' => Collective\Html\FormFacade::class,
         //'Html' => Collective\Html\HtmlFacade::class,
 
